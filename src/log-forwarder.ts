@@ -23,7 +23,7 @@ export function startLogForwarder(logFilePath: string, notificationAddress: stri
 
           await fetch(`http://${notificationAddress}/minecraft/logs`, {
             method: "POST",
-            headers: { "Content-Type": "text/plain" },
+            headers: { "Content-Type": "text/plain", "X-Server-Id": "dj2", },
             body: line,
           });
         }
