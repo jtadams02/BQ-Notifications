@@ -29,6 +29,8 @@ export function startLogForwarder(logFilePath: string, notificationAddress: stri
         }
       }).catch(console.error);
     });
+    console.log(`[Log Watcher] Started watching: ${logFilePath}`);
+    console.log(`[Log Watcher] Forwarding to: http://${notificationAddress}/minecraft/logs (server: dj2)`);
   }
 
   setupWatcher();
