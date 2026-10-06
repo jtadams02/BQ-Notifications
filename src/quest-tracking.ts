@@ -18,12 +18,12 @@ export async function processQuests(questFilePath: string, nameCacheFilePath: st
     if (Object.keys(completionData).length > 0) {
       for (const completion of Object.values(completionData)) {
         const name = await getNameFromUUID(nameCacheFilePath, completion["uuid:8"]);
+        if (!playerCompletedQuests.has(name)) {
+          playerCompletedQuests.set(name, new Set());
+        }
         if (firstRun) {
 
           // Need to populate entire map on first run
-          if (!playerCompletedQuests.has(name)) {
-            playerCompletedQuests.set(name, new Set());
-          }
           playerCompletedQuests.get(name)?.add(questId);
 
         } else {
@@ -38,7 +38,7 @@ export async function processQuests(questFilePath: string, nameCacheFilePath: st
 
       }
     }
-    // Flip the firstRun flag to false after processing the first file
-    firstRun = false;
   }
+  // Finish recording all existing completions before sending new ones.
+  firstRun = false;
 }
