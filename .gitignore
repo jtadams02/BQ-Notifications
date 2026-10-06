@@ -1,0 +1,24 @@
+# Dependencies and compiled output
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Environment settings and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Local Minecraft server data
+/QuestProgress.json
+/QuestingParties.json
+/NameCache.json
+/LifeDatabase.json
+/QuestDatabase.json
+/en_us.lang
+
+# OS files
+.DS_Store
+Thumbs.db
