@@ -31,7 +31,7 @@ export async function processQuests(questFilePath: string, nameCacheFilePath: st
           // Check if player has already completed this quest
           if (!playerCompletedQuests.get(name)?.has(questId)) {
             playerCompletedQuests.get(name)?.add(questId);
-            await sendNotification(notificationAddress, name, await getQuestName(langFilePath, questId));
+            await sendNotification(notificationAddress, "dj2", name, await getQuestName(langFilePath, questId));
           }
 
         }

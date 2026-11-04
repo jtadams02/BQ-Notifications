@@ -1,7 +1,7 @@
 import { watch, type FSWatcher } from "node:fs";
 import readLastLines from "read-last-lines";
 
-export function startLogForwarder(logFilePath: string, notificationAddress: string) {
+export function startLogForwarder(logFilePath: string, notificationAddress: string, serverId: string = "gtnh") {
   let previousContent = "";
   let watcher: FSWatcher;
 
@@ -23,14 +23,14 @@ export function startLogForwarder(logFilePath: string, notificationAddress: stri
 
           await fetch(`http://${notificationAddress}/minecraft/logs`, {
             method: "POST",
-            headers: { "Content-Type": "text/plain", "X-Server-Id": "dj2", },
+            headers: { "Content-Type": "text/plain", "X-Server-Id": serverId, },
             body: line,
           });
         }
       }).catch(console.error);
     });
     console.log(`[Log Watcher] Started watching: ${logFilePath}`);
-    console.log(`[Log Watcher] Forwarding to: http://${notificationAddress}/minecraft/logs (server: dj2)`);
+    console.log(`[Log Watcher] Forwarding to: http://${notificationAddress}/minecraft/logs (server: gtnh)`);
   }
 
   setupWatcher();
