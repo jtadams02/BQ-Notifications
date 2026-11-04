@@ -27,7 +27,6 @@ export async function processGTNHQuests(questFolderPath: string, notificationAdd
             if (Object.keys(completionData).length > 0) {
                 // Player has completed the quest, if this is the first run, we just populate the map, otherwise we send a notification
                 const questIdSet = `${questIdHigh.toString()}:${questIdLow.toString()}`;
-                console.log(`Completed Quest Found: Quest ID: ${questIdSet} - Quest Name: ${await getQuestName(questIdHigh, questIdLow, questFolderPath)} - Player: ${name}`);
                 if (firstRun) {
                     playerCompletedQuests.get(name)?.add(questIdSet);
                 } else {

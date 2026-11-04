@@ -39,7 +39,7 @@ export async function getQuestName(questIdHigh: bigint, questIdLow: bigint, ques
 
             const cleanName = questName.replace(/§[0-9a-fk-or]/gi, "");
 
-            console.log(`Quest ID: ${questId}, Quest Name: ${cleanName}`);
+
             questNameCache.set(questId, cleanName);
         }
     }
