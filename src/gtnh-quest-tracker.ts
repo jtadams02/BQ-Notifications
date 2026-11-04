@@ -34,7 +34,7 @@ export async function processGTNHQuests(questFolderPath: string, notificationAdd
                     if (!playerCompletedQuests.get(name)?.has(questIdSet)) {
                         playerCompletedQuests.get(name)?.add(questIdSet);
 
-                        await sendNotification(notificationAddress, "gtnh", await getQuestName(questIdHigh, questIdLow, questFolderPath), questIdSet);
+                        await sendNotification(notificationAddress, "gtnh", name, await getQuestName(questIdHigh, questIdLow, questFolderPath));
                     }
                 }
             }
