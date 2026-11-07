@@ -38,7 +38,6 @@ export async function readQuestFile(betterQuestFolderPath: string): Promise<Play
     const playerData: PlayerQuestData[] = [];
     for (let i = 0; i < uuids.length; i++) {
         const playerProgressPath = `${betterQuestFolderPath}/QuestProgress/${uuids[i]}.json`;
-        // TODO: Read and process each player's quest progress file here
         const playerQuestData = await parseQuestData(playerProgressPath);
         if (playerQuestData) {
             playerData.push({
@@ -67,7 +66,7 @@ async function readNameCache(nameCacheFilePath: string): Promise<[string[], stri
     return [uuidList, nameList];
 }
 
-async function parseQuestData(questDataFilePath: string): Promise<QuestProgressFile> {
+async function parseQuestData(questDataFilePath: string): Promise<QuestProgressFile | null> {
     try {
         const data = await readFile(questDataFilePath, "utf-8");
         return JSON.parse(data, (key, value, context?: any) => {
@@ -77,9 +76,12 @@ async function parseQuestData(questDataFilePath: string): Promise<QuestProgressF
         return value;
     });
     } catch (error) {
+        if (error instanceof Error && "code" in error && error.code === "ENOENT") {
+            return null;
+        }
         console.error(`Error reading quest data file at ${questDataFilePath}:`, error);
     }
 
-    return null as any;
+    return null;
     
 }
